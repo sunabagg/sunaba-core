@@ -33,12 +33,12 @@ public class MapLoader
     public static void LoadTextures(string path, IoInterface ioInterface, Node funcGodotMap)
     {
         var tempTexturePath = "user://temp_texture_cache"; // Example path for caching textures
-        funcGodotMap.Call("set_base_texture_dir", path);
         if (!DirAccess.DirExistsAbsolute(tempTexturePath))
         {
             // Create the directory if it doesn't exist
             DirAccess.MakeDirAbsolute(tempTexturePath);
         }
+        funcGodotMap.Call("set_base_texture_dir", tempTexturePath);
         
         var pngFiles = ioInterface.GetFileList(path, ".png");
         var jpgFiles = ioInterface.GetFileList(path, ".jpg");
