@@ -4,7 +4,7 @@ namespace Sunaba.Core;
 
 public static class MapLoader
 {
-    public static Node LoadMap(string path, Node node, IoInterface ioInterface)
+    public static Node CreateMapNode(string path, Node node)
     {
         var funcGodotMapScript = GD.Load<GDScript>("res://addons/func_godot/src/map/func_godot_map.gd");
         if (funcGodotMapScript == null)
@@ -19,17 +19,26 @@ public static class MapLoader
             return null;
         }
         node.AddChild(funcGodotMap); // Add the func_godot_map instance to the scene tree
+         // Pass the TextureLoader to the func_godot_map instance
+         return funcGodotMap;
+    }
+    
+    public static void SetTexturePath(string path, Node funcGodotMap, IoInterface ioInterface)
+    {
+        funcGodotMap.Call("set_base_texture_dir", path);
         var TextureLoader = new TextureLoader(ioInterface);
-        funcGodotMap.Call("set_texture_loader", TextureLoader); // Pass the TextureLoader to the func_godot_map instance
+        funcGodotMap.Call("set_texture_loader", TextureLoader);
+    }
+
+    public static void LoadMap(string path, Node funcGodotMap, IoInterface ioInterface)
+    {
         var mapContents = ioInterface.LoadText(path);
         if (string.IsNullOrEmpty(mapContents))
         {
             GD.PrintErr($"Failed to load map contents from path: {path}");
-            funcGodotMap.QueueFree();
-            return null;
+            return; // Handle the error as needed
         }
         funcGodotMap.Call("load_from_string", mapContents); // Call the method to load the map from the string
-        return funcGodotMap;
     }
 
     public static void addPostLoadCallback(WattleScript.Interpreter.Closure func, Node node)
