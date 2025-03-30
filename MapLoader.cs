@@ -2,7 +2,7 @@ using Godot;
 
 namespace Sunaba.Core;
 
-public static class MapLoader
+public class MapLoader
 {
     public static Node CreateMapNode()
     {

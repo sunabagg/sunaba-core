@@ -29,6 +29,7 @@ public class GodotExtensions : Module
         UserData.RegisterType<PointClass>();
         UserData.RegisterType<ModelPointClass>();
         UserData.RegisterType<FgdFile>();
+        UserData.RegisterType<MapLoader>();
 
         GdExtNamespace["FreeLookCamera2D"] = typeof(FreeLookCamera2D);
         GdExtNamespace["FreeLookCamera3D"] = typeof(FreeLookCamera3D);
@@ -45,5 +46,6 @@ public class GodotExtensions : Module
         GdExtNamespace["PointClass"] = typeof(PointClass);
         GdExtNamespace["ModelPointClass"] = typeof(ModelPointClass);
         GdExtNamespace["FgdFile"] = typeof(FgdFile);
+        GdExtNamespace["MapLoader"] = typeof(MapLoader);
     }
 }
