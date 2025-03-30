@@ -4,7 +4,7 @@ namespace Sunaba.Core;
 
 public static class MapLoader
 {
-    public static Node CreateMapNode(string path)
+    public static Node CreateMapNode()
     {
         var funcGodotMapScript = GD.Load<GDScript>("res://addons/func_godot/src/map/func_godot_map.gd");
         if (funcGodotMapScript == null)
