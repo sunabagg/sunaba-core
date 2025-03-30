@@ -40,7 +40,7 @@ public static class MapLoader
         funcGodotMap.Call("load_from_string", mapContents); // Call the method to load the map from the string
     }
 
-    public static void addPostLoadCallback(WattleScript.Interpreter.Closure func, Node node)
+    public static void AddPostLoadCallback(WattleScript.Interpreter.Closure func, Node node)
     {
         var action = new Action(() =>
         {
