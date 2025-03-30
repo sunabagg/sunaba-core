@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Text;
 using Godot;
 using WattleScript.Interpreter;
