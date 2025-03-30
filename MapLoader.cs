@@ -54,11 +54,13 @@ public class MapLoader
             var pngBytes = ioInterface.LoadBytes(pngFilePath);
             if (pngBytes != null)
             {
-                string[] pathTree = pngFilePath.Replace(ioInterface.PathUrl, "").Split("/");
+                string[] pathTree = pngFilePath.Replace(path, "").Split("/");
 
                 string directory = tempTexturePath;
                 foreach (var pathName in pathTree)
                 {
+                    if (pathName.Contains(":"))
+                        continue;
                     if (!pathName.EndsWith(".png"))
                     {
                         directory += "/" + pathName; // Build the directory path
@@ -67,7 +69,7 @@ public class MapLoader
                     }
                 }
                 
-                FileAccess fileAccess = FileAccess.Open(directory + "/" + pngFilePath.Replace(ioInterface.PathUrl, ""), FileAccess.ModeFlags.Write);
+                FileAccess fileAccess = FileAccess.Open(directory + "/" + pngFilePath.GetFile(), FileAccess.ModeFlags.Write);
                 if (fileAccess != null)
                 {
                     // Write the bytes to the file
