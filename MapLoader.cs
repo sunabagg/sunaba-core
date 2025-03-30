@@ -4,7 +4,7 @@ namespace Sunaba.Core;
 
 public static class MapLoader
 {
-    public static Node CreateMapNode(string path, Node node)
+    public static Node CreateMapNode(string path)
     {
         var funcGodotMapScript = GD.Load<GDScript>("res://addons/func_godot/src/map/func_godot_map.gd");
         if (funcGodotMapScript == null)
@@ -18,7 +18,6 @@ public static class MapLoader
             GD.PrintErr("Failed to create instance of func_godot_map.");
             return null;
         }
-        node.AddChild(funcGodotMap); // Add the func_godot_map instance to the scene tree
          // Pass the TextureLoader to the func_godot_map instance
          return funcGodotMap;
     }
