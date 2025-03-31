@@ -15,53 +15,62 @@ public class GodotModule : Module
         Table GdCoreNamespace = new Table(LuaEnviroment.Script);
         LuaEnviroment.Script.Globals["godot"] = GdCoreNamespace;
         
-        UserData.RegisterType(typeof(AudioServer));
-        UserData.RegisterType(typeof(CameraServer));
-        UserData.RegisterType(typeof(DisplayServer));
-        UserData.RegisterType(typeof(NavigationServer2D));
-        UserData.RegisterType(typeof(NavigationServer3D));
         UserData.RegisterType(typeof(OpenXRExtensionWrapperExtension));
         UserData.RegisterType(typeof(OpenXRInteractionProfileMetadata));
         UserData.RegisterType(typeof(PhysicsDirectBodyState2D));
         UserData.RegisterType(typeof(PhysicsDirectSpaceState2D));
-        UserData.RegisterType(typeof(PhysicsServer2D));
-        UserData.RegisterType(typeof(PhysicsServer2DManager));
         UserData.RegisterType(typeof(PhysicsDirectBodyState3D));
         UserData.RegisterType(typeof(PhysicsDirectSpaceState3D));
-        UserData.RegisterType(typeof(PhysicsServer3D));
-        UserData.RegisterType(typeof(PhysicsServer3DManager));
         UserData.RegisterType(typeof(RefCounted));
-        UserData.RegisterType(typeof(RenderingDevice));
-        UserData.RegisterType(typeof(RenderingServer));
         UserData.RegisterType(typeof(ThemeDB));
         UserData.RegisterType(typeof(Time));
-        UserData.RegisterType(typeof(TranslationServer));
         UserData.RegisterType(typeof(UndoRedo));
-        UserData.RegisterType(typeof(XRServer));
+        
+        if (LuaEnviroment.Sandboxed == false)
+        {
+            UserData.RegisterType(typeof(AudioServer));
+            UserData.RegisterType(typeof(CameraServer));
+            UserData.RegisterType(typeof(DisplayServer));
+            UserData.RegisterType(typeof(NavigationServer2D));
+            UserData.RegisterType(typeof(NavigationServer3D));
+            UserData.RegisterType(typeof(PhysicsServer2D));
+            UserData.RegisterType(typeof(PhysicsServer2DManager));
+            UserData.RegisterType(typeof(PhysicsServer3D));
+            UserData.RegisterType(typeof(PhysicsServer3DManager));
+            UserData.RegisterType(typeof(RenderingDevice));
+            UserData.RegisterType(typeof(RenderingServer));
+            UserData.RegisterType(typeof(TranslationServer));
+            UserData.RegisterType(typeof(XRServer));
+            UserData.RegisterType(typeof(Rid));
+            
+            GdCoreNamespace[nameof(AudioServer)] = UserData.CreateStatic(typeof(AudioServer));
+            GdCoreNamespace[nameof(CameraServer)] = UserData.CreateStatic(typeof(CameraServer));
+            GdCoreNamespace[nameof(DisplayServer)] = UserData.CreateStatic(typeof(DisplayServer));
+            GdCoreNamespace[nameof(NavigationServer2D)] = UserData.CreateStatic(typeof(NavigationServer2D));
+            GdCoreNamespace[nameof(NavigationServer3D)] = UserData.CreateStatic(typeof(NavigationServer3D));
+            GdCoreNamespace[nameof(PhysicsServer2D)] = UserData.CreateStatic(typeof(PhysicsServer2D));
+            GdCoreNamespace[nameof(PhysicsServer2DManager)] = UserData.CreateStatic(typeof(PhysicsServer2DManager));
+            GdCoreNamespace[nameof(PhysicsServer3D)] = UserData.CreateStatic(typeof(PhysicsServer3D));
+            GdCoreNamespace[nameof(PhysicsServer3DManager)] = UserData.CreateStatic(typeof(PhysicsServer3DManager));
+            GdCoreNamespace[nameof(XRServer)] = UserData.CreateStatic(typeof(XRServer));
+            GdCoreNamespace[nameof(TranslationServer)] = UserData.CreateStatic(typeof(TranslationServer));
+            if (LuaEnviroment.Sandboxed == false)
+                GdCoreNamespace[nameof(RenderingDevice)] = UserData.CreateStatic(typeof(RenderingDevice));
+            GdCoreNamespace[nameof(RenderingServer)] = UserData.CreateStatic(typeof(RenderingServer));
+            GdCoreNamespace[nameof(Rid)] = UserData.CreateStatic(typeof(Rid));
+        }
 
-        GdCoreNamespace[nameof(AudioServer)] = UserData.CreateStatic(typeof(AudioServer));
-        GdCoreNamespace[nameof(CameraServer)] = UserData.CreateStatic(typeof(CameraServer));
-        GdCoreNamespace[nameof(DisplayServer)] = UserData.CreateStatic(typeof(DisplayServer));
-        GdCoreNamespace[nameof(NavigationServer2D)] = UserData.CreateStatic(typeof(NavigationServer2D));
-        GdCoreNamespace[nameof(NavigationServer3D)] = UserData.CreateStatic(typeof(NavigationServer3D));
+        
         GdCoreNamespace[nameof(OpenXRExtensionWrapperExtension)] = UserData.CreateStatic(typeof(OpenXRExtensionWrapperExtension));
         GdCoreNamespace[nameof(OpenXRInteractionProfileMetadata)] = UserData.CreateStatic(typeof(OpenXRInteractionProfileMetadata));
         GdCoreNamespace[nameof(PhysicsDirectBodyState2D)] = UserData.CreateStatic(typeof(PhysicsDirectBodyState2D));
         GdCoreNamespace[nameof(PhysicsDirectSpaceState2D)] = UserData.CreateStatic(typeof(PhysicsDirectSpaceState2D));
-        GdCoreNamespace[nameof(PhysicsServer2D)] = UserData.CreateStatic(typeof(PhysicsServer2D));
-        GdCoreNamespace[nameof(PhysicsServer2DManager)] = UserData.CreateStatic(typeof(PhysicsServer2DManager));
         GdCoreNamespace[nameof(PhysicsDirectBodyState3D)] = UserData.CreateStatic(typeof(PhysicsDirectBodyState3D));
         GdCoreNamespace[nameof(PhysicsDirectSpaceState3D)] = UserData.CreateStatic(typeof(PhysicsDirectSpaceState3D));
-        GdCoreNamespace[nameof(PhysicsServer3D)] = UserData.CreateStatic(typeof(PhysicsServer3D));
-        GdCoreNamespace[nameof(PhysicsServer3DManager)] = UserData.CreateStatic(typeof(PhysicsServer3DManager));
-        if (LuaEnviroment.Sandboxed == false)
-            GdCoreNamespace[nameof(RenderingDevice)] = UserData.CreateStatic(typeof(RenderingDevice));
-        GdCoreNamespace[nameof(RenderingServer)] = UserData.CreateStatic(typeof(RenderingServer));
         GdCoreNamespace[nameof(ThemeDB)] = UserData.CreateStatic(typeof(ThemeDB));
         GdCoreNamespace[nameof(Time)] = UserData.CreateStatic(typeof(Time));
-        GdCoreNamespace[nameof(TranslationServer)] = UserData.CreateStatic(typeof(TranslationServer));
         GdCoreNamespace[nameof(UndoRedo)] = UserData.CreateStatic(typeof(UndoRedo));
-        GdCoreNamespace[nameof(XRServer)] = UserData.CreateStatic(typeof(XRServer));
+        
 
         if (!LuaEnviroment.Sandboxed)
 		{
