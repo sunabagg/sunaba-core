@@ -1,4 +1,5 @@
 using Godot;
+using FileAccess = Godot.FileAccess;
 
 namespace Sunaba.Core;
 
@@ -24,7 +25,7 @@ public partial class SimpleRuntimeNode : Node
                 }
                 else if (ProjectSettings.GlobalizePath(args[i]).EndsWith(".sbx") || ProjectSettings.GlobalizePath(args[i]).EndsWith(".sbz") || ProjectSettings.GlobalizePath(args[i]).EndsWith(".sbzip"))
                 {
-                    var p = args[i];
+                    var p = ProjectSettings.GlobalizePath(args[i]);
                     StartFromZipFile(p);
                 }
             }
@@ -60,6 +61,14 @@ public partial class SimpleRuntimeNode : Node
     {
         LuaNode = new LuaNode();
         AddChild(LuaNode);
-        LuaNode.StartFromZipFile(path);
+        FileAccess fileAccess = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+        if (fileAccess == null)
+        {
+            GD.PrintErr("Failed to open file: " + path);
+            throw new Exception("Failed to open file: " + path);
+            return;
+        }
+        byte[] data = fileAccess.GetBuffer((int)fileAccess.GetLength());
+        LuaNode.StartFromZipFile(data);
     }
 }

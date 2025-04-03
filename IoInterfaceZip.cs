@@ -44,7 +44,7 @@ public class IoInterfaceZip : IoInterface
                 throw new Exception("Path Conversion Error");
             }
         }
-        if (path.Contains("/"))
+        if (path.Contains("\\"))
         {
             path = path.Replace("\\/", "/");
             path = path.Replace("\\", "/");
@@ -53,6 +53,7 @@ public class IoInterfaceZip : IoInterface
         {
             path = path.Replace("/", "\\");
         }
+        path = path.Replace("\\", "/");
         return path;
     }
 
