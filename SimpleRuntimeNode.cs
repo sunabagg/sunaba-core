@@ -17,12 +17,12 @@ public partial class SimpleRuntimeNode : Node
             var args = OS.GetCmdlineArgs();
             for (var i = 0; i < args.Length; i++)
             {
-                if (args[i].StartsWith("--dirpath="))
+                if (ProjectSettings.GlobalizePath(args[i]).StartsWith("--dirpath="))
                 {
-                    var p = args[i].Replace("--dirpath=", "");
+                    var p = ProjectSettings.GlobalizePath(args[i].Replace("--dirpath=", ""));
                     StartFromPath(p);
                 }
-                else if (args[i].EndsWith(".sbx") || args[i].EndsWith(".sbz") || args[i].EndsWith(".sbzip"))
+                else if (ProjectSettings.GlobalizePath(args[i]).EndsWith(".sbx") || ProjectSettings.GlobalizePath(args[i]).EndsWith(".sbz") || ProjectSettings.GlobalizePath(args[i]).EndsWith(".sbzip"))
                 {
                     var p = args[i];
                     StartFromZipFile(p);
