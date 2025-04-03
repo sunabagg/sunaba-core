@@ -22,9 +22,9 @@ public partial class SimpleRuntimeNode : Node
                     var p = args[i].Replace("--dirpath=", "");
                     StartFromPath(p);
                 }
-                else if (args[i].StartsWith("--spkgpath="))
+                else if (args[i].EndsWith(".sbx") || args[i].EndsWith(".sbz") || args[i].EndsWith(".sbzip"))
                 {
-                    var p = args[i].Replace("--spkgpath=", "");
+                    var p = args[i];
                     StartFromZipFile(p);
                 }
             }
